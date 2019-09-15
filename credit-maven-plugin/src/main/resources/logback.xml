@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- <property name="DEV_HOME" value="c:/logs" /> -->
+	<!-- Logs directory in user projects -->
+	<property name="DEV_HOME" value="logs" />
+
+	<appender name="change-appender" class="ch.qos.logback.core.FileAppender">
+		<file>${DEV_HOME}/change.log</file>
+		<append>true</append>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="error-appender" class="ch.qos.logback.core.FileAppender">
+		<file>${DEV_HOME}/error.log</file>
+		<append>false</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<cleanHistoryOnStart>Yes</cleanHistoryOnStart>
+		</rollingPolicy>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+
+	<logger name="change" level="ALL" additivity="false">
+		<appender-ref ref="change-appender" />
+	</logger>
+
+	<logger name="error" level="ALL" additivity="false">
+		<appender-ref ref="error-appender" />
+	</logger>
+
+	<root level="error">
+		<appender-ref ref="error-appender" />
+	</root>
+
+
+
+
+</configuration>
